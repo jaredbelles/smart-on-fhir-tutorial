@@ -6,10 +6,21 @@
       console.log('Loading error', arguments);
       ret.reject();
     }
-
+/*      function ready(smart) {
+        var patient = smart.api.read({type: 'Patient', id: '711924'}).then(function(response) {
+         document.body.innerText = JSON.stringify(response);
+        });
+       }
+      function notReady() {
+        if (window.location.href.indexOf('error') < 0) {
+          document.body.innerText = "Launch first.";
+        }
+      }
+      FHIR.oauth2.ready(ready, notReady);*/
+    
     function onReady(smart)  {
       if (smart.hasOwnProperty('patient')) {
-        var patient = smart.patient;
+        var patient = smart.patient({type: 'Patient', id: '711924'});
         var pt = patient.read();
         var obv = smart.patient.api.fetchAll({
                       type: 'Observation',
